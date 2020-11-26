@@ -18,8 +18,7 @@ class LolChampions::CLI
         puts "How would you like to find a champion? Select from the options below: 1, 2, 3, or exit?"
         # Get User Choice
         user_input = gets.chomp
-        # Based on User Choice, run the next method
-        # Possibly change this to a While Loop with Case Statements
+        # Based on User Choice, run the next method # Possibly change this to a While Loop with Case Statements
         if user_input.to_i == 1
             print_all_champions
         elsif user_input.to_i == 2
@@ -33,6 +32,9 @@ class LolChampions::CLI
             main_menu
         end
     end
+
+
+    #The below methods need to pull from Champion class using find methods based on deeper dive into attributes
 
     def difficulty_menu
         puts "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard?" #easy will be 1-4, medium 5-7, hard 8-10
@@ -77,28 +79,12 @@ class LolChampions::CLI
 
 
     #This method will list all the the Champion Instances with index number
+    
     def print_all_champions
         LolChampions::Champion.all.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name}"
         end
     end
 
-    #The below methods need to pull from Champion class based on deeper dive into attributes
-    #Need to incorporate methods in Champion class that find by those attributes
-
-    def print_difficulty_easy_champions
-        #pull from champion class, sort by name
-        #iterate through with index
-    end
-
-    def print_difficulty_med_champions
-        #pull from champion class, sort by name
-        #iterate through with index
-    end
-
-    def print_difficulty_hard_champions
-        #pull from champion class, sort by name
-        #iterate through with index
-    end
 
 end
