@@ -7,20 +7,20 @@ class LolChampions::CLI
 
     def main_menu
         # Provide Initial Menu Options
-        puts "How would you like to find a champion? Select from the options below: 1, 2, 3, or exit?"
         puts "1. All the Champions"
         puts "2. Champions by Difficulty Level"
         puts "3. Champions by Type"
+        puts "How would you like to find a champion? Select from the options below: 1, 2, 3, or exit?"
         # Get User Choice
         user_input = gets.chomp
         # Based on User Choice, run the next method
-
+        # Possibly change this to a While Loop with Case Statements
         if user_input.to_i == 1
             #run method to show list of all the champions
         elsif user_input.to_i == 2
-            #run method to show a new menu of difficulty levels
+            difficulty_menu #run method to show a new menu of difficulty levels
         elsif user_input.to_i == 3
-            #run method to show a new menu of types
+            type_menu #run method to show a new menu of types
         elsif user_input == 'exit'
             exit
         else
@@ -81,13 +81,57 @@ class LolChampions::CLI
 
 
     def print_all_champions
+        #pull from champion class, sort by name
+        #iterate through with index
     end
 
-    def print_difficulty_champions
+    #The below methods need to pull from Champion class based on deeper dive into attributes
+    #Need to incorporate methods in Champion class that find by those attributes
+
+    def print_difficulty_easy_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_difficulty_med_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_difficulty_hard_champions
+        #pull from champion class, sort by name
+        #iterate through with index
     end
 
 
-    def print_type_champions
+    def print_fighter_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_tank_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_mage_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_assassin_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_marksman_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
+    end
+
+    def print_support_type_champions
+        #pull from champion class, sort by name
+        #iterate through with index
     end
 
 end
