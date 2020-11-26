@@ -1,5 +1,9 @@
 class LolChampions::CLI 
 
+    def initialize
+        LolChampions::API.new.get_champions
+    end
+
     def call
         puts "Hello Summoner, welcome to the League of Legends Champion Finder!"
         main_menu

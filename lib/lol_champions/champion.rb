@@ -1,12 +1,11 @@
 class LolChampions::Champion
 
-    attr_accessor :name, :info, :tags, :stats, 
+    attr_accessor :name, :info, :tags, :stats
     #name value is a String, info value is a hash, tags value is an array, stats value is a hash
 
     @@all = []
 
-    def initialize()
-        
+    def initialize
         save
     end
 
@@ -21,11 +20,24 @@ class LolChampions::Champion
     # response["data"]["Champion.Name.Key"] #=> pulls up key/value pairs with relevant information
     # This method instantiantes new champions based on a collection passed to it; this will be used in the api method
     def self.create_from_collection(collection_hash)
-        collection_hash.each do |champ_key, value|
-            LolChampions::Champion.new(value)
+        collection_hash.each do |k, v|
+            v.each do |key, value|
+                champion = LolChampion::Champion.new
+                if key == "name"
+                    champion.name = value
+                elsif key == "info"
+                    champion.info = value
+                elsif key == "tags"
+                    champion.tags = value
+                elsif key == "stats"
+                    champion.stats = value
+                end
+                champion
+            end
         end
     end
 
+    binding.pry
 
 
     # This method finds all champions with the difficulty level of easy med hard; use if statements to pool easy as 1-4, med as 5-7, hard as 8-10
