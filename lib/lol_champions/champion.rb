@@ -44,8 +44,17 @@ class LolChampions::Champion
 
     # This method finds all champions with the difficulty level of easy med hard; use if statements to pool easy as 1-4, med as 5-7, hard as 8-10
     def self.find_by_difficulty(level)
-        # self.all.select {|song| song.name == name}
+        self.all.select do |champion|
+            if level == "easy"
+                champion.info["difficulty"] == 1 || champion.info["difficulty"] == 2 || champion.info["difficulty"] == 3 || champion.info["difficulty"] == 4
+            elsif level == "medium"
+                champion.info["difficulty"] == 5 || champion.info["difficulty"] == 6 || champion.info["difficulty"] == 7
+            elsif level == "hard"
+                champion.info["difficulty"] == 7 || champion.info["difficulty"] == 8 || champion.info["difficulty"] == 9
+            end
+        end
     end
+
     #This method finds all champions by a tag; the tag value is an array, so maybe use include? on this value to check those champions with multiple types
     def self.find_by_type(type)
         self.all.select do |champion|

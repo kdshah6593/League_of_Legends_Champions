@@ -39,12 +39,11 @@ class LolChampions::CLI
         puts "Type menu to return to the main menu or exit to exit the program"
         user_input = gets.chomp.downcase
 
-        if user_input == "easy"
-            #run method to show list of easy champions
-        elsif user_input == "medium"
-            #run method to show list of medium champions
-        elsif user_input == "hard"
-            #run method to show list of hard champions
+        if user_input == "easy" || user_input == "medium" || user_input == "hard"
+            champions = LolChampions::Champion.find_by_difficulty(user_input)
+            champions.each.with_index(1) do |champion, index|
+                puts "#{index}. #{champion.name} - #{champion.info["difficulty"]}"
+            end
         elsif user_input == "menu"
             main_menu
         elsif user_input == "exit"
