@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require_relative "../lib/lol_champions_environment"
 
-puts "Welcome to the League of Legends Champion Finder!"
+LolChampions::CLI.new.call
