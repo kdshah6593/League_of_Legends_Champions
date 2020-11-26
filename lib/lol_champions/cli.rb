@@ -21,7 +21,7 @@ class LolChampions::CLI
         # Based on User Choice, run the next method
         # Possibly change this to a While Loop with Case Statements
         if user_input.to_i == 1
-            #run method to show list of all the champions
+            print_all_champions
         elsif user_input.to_i == 2
             difficulty_menu #run method to show a new menu of difficulty levels
         elsif user_input.to_i == 3
@@ -84,10 +84,11 @@ class LolChampions::CLI
     end
 
 
-
+    #This method will list all the the Champion Instances with index number
     def print_all_champions
-        #pull from champion class, sort by name
-        #iterate through with index
+        LolChampions::Champion.all.each.with_index(1) do |champion, index|
+            puts "#{index}. #{champion.name}"
+        end
     end
 
     #The below methods need to pull from Champion class based on deeper dive into attributes
