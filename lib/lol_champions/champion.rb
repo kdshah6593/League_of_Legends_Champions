@@ -6,23 +6,23 @@ class LolChampions::Champion
     @@all = []
 
     def initialize
-        save
+        self.all << self
     end
 
     def self.all
         @@all
     end
 
-    def save
-        @@all << self
-    end
+    # def save
+    #     @@all << self
+    # end
 
     # response["data"]["Champion.Name.Key"] #=> pulls up key/value pairs with relevant information
     # This method instantiantes new champions based on a collection passed to it; this will be used in the api method
     def self.create_from_collection(collection_hash)
         collection_hash.each do |k, v|
             v.each do |key, value|
-                champion = LolChampion::Champion.new
+                champion = self.new
                 if key == "name"
                     champion.name = value
                 elsif key == "info"
@@ -38,7 +38,6 @@ class LolChampions::Champion
     end
 
     binding.pry
-
 
     # This method finds all champions with the difficulty level of easy med hard; use if statements to pool easy as 1-4, med as 5-7, hard as 8-10
     def self.find_by_difficulty(level)

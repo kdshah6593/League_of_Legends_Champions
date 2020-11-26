@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
 require_relative "../lib/lol_champions_environment"
 
-LolChampions::API.get_champions
-
 LolChampions::CLI.new.call
