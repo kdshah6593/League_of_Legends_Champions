@@ -1,0 +1,2 @@
+class LolChampions::CLI 
+end
