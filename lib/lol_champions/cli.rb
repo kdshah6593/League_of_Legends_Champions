@@ -89,27 +89,27 @@ class LolChampions::CLI
 
         ask_again_type
     end
-    
+#---------------------------------------------------------------------------------------------------
     def print_all_champions
-        LolChampions::Champion.all.each.with_index(1) do |champion, index|
-            puts "#{index}. #{champion.name}"
-        end
-    end
-
-    def print_type_champions(user_input)  #
-        champions = LolChampions::Champion.find_by_type(user_input)
-        champions.each.with_index(1) do |champion, index|
+        list_champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name}"
         end
     end
 
     def print_difficulty_champions(user_input)  #
-        champions = LolChampions::Champion.find_by_difficulty(user_input)
+        champions = list_champions_difficulty(user_input)
         champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name} - #{champion.info["difficulty"]}"
         end
     end
 
+    def print_type_champions(user_input)  #
+        champions = list_champions_type(user_input)
+        champions.each.with_index(1) do |champion, index|
+            puts "#{index}. #{champion.name}"
+        end
+    end
+#---------------------------------------------------------------------------------------------------
     def ask_specific_champion
         print "Enter the number of the specific champion you would like to know more about: "
     end
@@ -138,7 +138,7 @@ class LolChampions::CLI
     def cya_later
         puts "See you on the Rift. Bye!"
     end
-
+#---------------------------------------------------------------------------------------------------
     def list_champions
         LolChampions::Champion.all
     end
@@ -150,7 +150,7 @@ class LolChampions::CLI
     def list_champions_type(type)
         LolChampions::Champion.find_by_type(type)
     end
-
+#---------------------------------------------------------------------------------------------------
     def print_champion_details(number)
         champion = list_champions[number - 1]
         champion_print_out(champion)
@@ -165,7 +165,7 @@ class LolChampions::CLI
         champion = list_champions_type(champ_type)[number - 1]
         champion_print_out(champion)
     end
-
+#---------------------------------------------------------------------------------------------------
     def champion_print_out(champion)
         puts ""
         puts "---------------------------------------------"
@@ -184,6 +184,24 @@ class LolChampions::CLI
         puts "            Attack Speed: #{champion.stats["attackspeed"]}"
         puts "---------------------------------------------"
         puts ""
+    end
+#---------------------------------------------------------------------------------------------------
+    def ask_again
+        ask_specific_champion
+        user_input2 = gets.chomp
+        input_int = user_input2.to_i
+    
+        if input_int.is_a?(Integer) && input_int > 0 && input_int <= self.list_champions.length
+            print_champion_details(input_int)
+        elsif user_input2 == "menu"
+            main_menu
+        elsif user_input2 == "exit"
+            cya_later
+            exit
+        else
+            invalid_input
+            ask_again
+        end
     end
 
     def ask_again_difficulty
@@ -222,23 +240,6 @@ class LolChampions::CLI
         end
     end
 
-    def ask_again
-        ask_specific_champion
-        user_input2 = gets.chomp
-        input_int = user_input2.to_i
-    
-        if input_int.is_a?(Integer) && input_int > 0 && input_int <= self.list_champions.length
-            print_champion_details(input_int)
-        elsif user_input2 == "menu"
-            main_menu
-        elsif user_input2 == "exit"
-            cya_later
-            exit
-        else
-            invalid_input
-            ask_again
-        end
-    end
 end
 
 
