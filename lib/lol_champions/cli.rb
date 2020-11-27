@@ -17,7 +17,7 @@ class LolChampions::CLI
         puts "1. All the Champions"
         puts "2. Champions by Difficulty Level"
         puts "3. Champions by Type"
-        puts "How would you like to find a champion? Select from the options above: 1, 2, 3, or exit?"
+        print "How would you like to find a champion? Select from the options above: 1, 2, 3, or exit? "
                                                                                                         # Get User Choice
         user_input = gets.chomp
                                                                                                         # Based on User Choice, run the next method
@@ -33,7 +33,7 @@ class LolChampions::CLI
         elsif user_input.to_i == 3
             puts ""
             type_menu                                                                                   #run method to show a new menu of types
-        elsif get_user_input == 'exit'
+        elsif user_input == 'exit'
             cya_later
             exit
         else
@@ -47,8 +47,10 @@ class LolChampions::CLI
     #The below methods need to pull from Champion class using find methods based on deeper dive into attributes
 
     def difficulty_menu
-        puts "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard?"
         puts "Type menu to return to the main menu or exit to exit the program"
+        puts ""
+        print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
+        
         user_input = gets.chomp.downcase
 
         if user_input == "easy" || user_input == "medium" || user_input == "hard"
@@ -69,9 +71,10 @@ class LolChampions::CLI
     end
 
     def type_menu
-        puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
         puts "Type menu to return to the main menu or exit to exit the program"
-        puts "Which champions based on type would you like too see?"
+        puts ""
+        puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
+        print "Which champions based on type would you like too see? "
         user_input = gets.chomp.downcase.capitalize
 
         if user_input == "Fighter" || user_input == "Tank" || user_input == "Mage" || user_input == "Assassin" || user_input == "Marksman" || user_input == "Support"
@@ -118,11 +121,7 @@ class LolChampions::CLI
 
                                                                                                 #These methods are for repeating statements 
     def ask_specific_champion
-        puts "Enter the number of the specific champion you would like to know more about:"
-    end
-
-    def get_user_input
-        user_input = gets.chomp
+        print "Enter the number of the specific champion you would like to know more about: "
     end
 
     def another_one?
