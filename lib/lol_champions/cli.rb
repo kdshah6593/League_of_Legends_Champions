@@ -23,23 +23,54 @@ class LolChampions::CLI
         print "How would you like to find a champion? Select a number from the options above: "
         user_input = gets.chomp
 
-        if user_input.to_i == 1
+        case user_input
+        when "1"
             puts ""
             print_all_champions
             ask_specific_champion
             user_input2 = gets.chomp.to_i
             print_champion(user_input2)
-        elsif user_input.to_i == 2
+        when "2"
             difficulty_menu
-        elsif user_input.to_i == 3
+        when "3"
             type_menu
-        elsif user_input == 'exit'
+        when "menu"
+            puts ""
+            puts "You are already at the Main Menu!"
+            puts ""
+            main_menu
+        when "exit"
             cya_later
             exit
         else
             invalid_input
+            puts ""
             main_menu
         end
+
+        # if user_input.to_i == 1
+        #     puts ""
+        #     print_all_champions
+        #     ask_specific_champion
+        #     user_input2 = gets.chomp.to_i
+        #     print_champion(user_input2)
+        # elsif user_input.to_i == 2
+        #     difficulty_menu
+        # elsif user_input.to_i == 3
+        #     type_menu
+        # elsif user_input == 'menu'
+        #     puts ""
+        #     puts "You are already at the Main Menu!"
+        #     puts ""
+        #     main_menu
+        # elsif user_input == 'exit'
+        #     cya_later
+        #     exit
+        # else
+        #     invalid_input
+        #     puts ""
+        #     main_menu
+        # end
     end
 
     def difficulty_menu
