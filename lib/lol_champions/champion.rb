@@ -60,7 +60,7 @@ class LolChampions::Champion
             elsif level == "medium"
                 champion.info["difficulty"] == 5 || champion.info["difficulty"] == 6 || champion.info["difficulty"] == 7
             elsif level == "hard"
-                champion.info["difficulty"] == 7 || champion.info["difficulty"] == 8 || champion.info["difficulty"] == 9
+                champion.info["difficulty"] == 8 || champion.info["difficulty"] == 9 || champion.info["difficulty"] == 10
             end
         end
     end

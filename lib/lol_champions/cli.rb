@@ -9,12 +9,12 @@ class LolChampions::CLI
         puts ""
         puts "Hello Summoner, welcome to the League of Legends Champion Finder!"
         puts "Note: Type 'menu' to return to the Main Menu or 'exit' to exit the program"
-        puts ""
         main_menu
         another_one?
     end
 
     def main_menu
+        puts ""
         puts "Main Menu"
         puts "1. See full list of the Champions"
         puts "2. Find Champions by Difficulty Level"
@@ -27,9 +27,7 @@ class LolChampions::CLI
         when "1"
             puts ""
             print_all_champions
-            ask_specific_champion
-            user_input2 = gets.chomp.to_i
-            print_champion(user_input2)
+            ask_again
         when "2"
             difficulty_menu
         when "3"
@@ -52,14 +50,14 @@ class LolChampions::CLI
     def difficulty_menu
         puts ""
         print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
-        user_input = gets.chomp.downcase
+        @user_input = gets.chomp.downcase
 
-        if user_input == "easy" || user_input == "medium" || user_input == "hard"
+        if @user_input == "easy" || @user_input == "medium" || @user_input == "hard"
             puts ""
-            print_difficulty_champions(user_input)
-        elsif user_input == "menu"
+            print_difficulty_champions(@user_input)
+        elsif @user_input == "menu"
             main_menu
-        elsif user_input == "exit"
+        elsif @user_input == "exit"
             cya_later
             exit
         else
@@ -67,23 +65,21 @@ class LolChampions::CLI
             difficulty_menu
         end
 
-        ask_specific_champion
-        user_input2 = gets.chomp.to_i
-        print_champion_difficulty(user_input, user_input2)
+        ask_again_difficulty
     end
 
     def type_menu
         puts ""
         puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
         print "Which champions based on type would you like too see? "
-        user_input = gets.chomp.downcase.capitalize
+        @user_input = gets.chomp.downcase.capitalize
 
-        if user_input == "Fighter" || user_input == "Tank" || user_input == "Mage" || user_input == "Assassin" || user_input == "Marksman" || user_input == "Support"
+        if @user_input == "Fighter" || @user_input == "Tank" || @user_input == "Mage" || @user_input == "Assassin" || @user_input == "Marksman" || @user_input == "Support"
             puts ""
-            print_type_champions(user_input)
-        elsif user_input == "Menu"
+            print_type_champions(@user_input)
+        elsif @user_input == "Menu"
             main_menu
-        elsif user_input == "Exit"
+        elsif @user_input == "Exit"
             cya_later
             exit
         else
@@ -91,9 +87,7 @@ class LolChampions::CLI
             type_menu
         end
 
-        ask_specific_champion
-        user_input2 = gets.chomp.to_i
-        print_champion_type(user_input, user_input2)
+        ask_again_type
     end
     
     def print_all_champions
@@ -102,14 +96,14 @@ class LolChampions::CLI
         end
     end
 
-    def print_type_champions(user_input)
+    def print_type_champions(user_input)  #
         champions = LolChampions::Champion.find_by_type(user_input)
         champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name}"
         end
     end
 
-    def print_difficulty_champions(user_input)
+    def print_difficulty_champions(user_input)  #
         champions = LolChampions::Champion.find_by_difficulty(user_input)
         champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name} - #{champion.info["difficulty"]}"
@@ -157,17 +151,17 @@ class LolChampions::CLI
         LolChampions::Champion.find_by_type(type)
     end
 
-    def print_champion(number)
+    def print_champion_details(number)
         champion = list_champions[number - 1]
         champion_print_out(champion)
     end
 
-    def print_champion_difficulty(difficulty, number)
+    def print_champion_details_difficulty(difficulty, number)
         champion = list_champions_difficulty(difficulty)[number - 1]
         champion_print_out(champion)
     end
 
-    def print_champion_type(champ_type, number)
+    def print_champion_details_type(champ_type, number)
         champion = list_champions_type(champ_type)[number - 1]
         champion_print_out(champion)
     end
@@ -190,6 +184,60 @@ class LolChampions::CLI
         puts "            Attack Speed: #{champion.stats["attackspeed"]}"
         puts "---------------------------------------------"
         puts ""
+    end
+
+    def ask_again_difficulty
+        ask_specific_champion
+        user_input2 = gets.chomp
+        input_int = user_input2.to_i
+    
+        if input_int.is_a?(Integer) && input_int > 0 && input_int <= list_champions_difficulty(@user_input).length
+            print_champion_details_difficulty(@user_input, input_int)
+        elsif user_input2 == "menu"
+            main_menu
+        elsif user_input2 == "exit"
+            cya_later
+            exit
+        else
+            invalid_input
+            ask_again_difficulty
+        end
+    end
+
+    def ask_again_type
+        ask_specific_champion
+        user_input2 = gets.chomp
+        input_int = user_input2.to_i
+    
+        if input_int.is_a?(Integer) && input_int > 0 && input_int <= list_champions_type(@user_input).length
+            print_champion_details_type(@user_input, input_int)
+        elsif user_input2 == "menu"
+            main_menu
+        elsif user_input2 == "exit"
+            cya_later
+            exit
+        else
+            invalid_input
+            ask_again_type
+        end
+    end
+
+    def ask_again
+        ask_specific_champion
+        user_input2 = gets.chomp
+        input_int = user_input2.to_i
+    
+        if input_int.is_a?(Integer) && input_int > 0 && input_int <= self.list_champions.length
+            print_champion_details(input_int)
+        elsif user_input2 == "menu"
+            main_menu
+        elsif user_input2 == "exit"
+            cya_later
+            exit
+        else
+            invalid_input
+            ask_again
+        end
     end
 end
 
@@ -220,3 +268,8 @@ end
     #     puts ""
     #     main_menu
     # end
+
+#When asking user if they want to find another champ
+    # ask_specific_champion
+    # user_input2 = gets.chomp.to_i
+    # print_champion_details_difficulty(user_input, user_input2)
