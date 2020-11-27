@@ -23,11 +23,11 @@ class LolChampions::Champion
     end
 
     def damage_type
-        if self.info["magic"] < 4
+        if self.info["magic"] < 5
             "Physical"
-        elsif self.info["magic"] >= 4 && self.info["magic"] < 7
+        elsif self.info["magic"] >= 5 && self.info["magic"] < 8
             "Mixed"
-        elsif self.info["magic"] >= 7
+        elsif self.info["magic"] >= 8
             "Magic"
         end
     end

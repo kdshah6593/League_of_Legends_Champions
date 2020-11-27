@@ -52,19 +52,26 @@ class LolChampions::CLI
         print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
         @user_input = gets.chomp.downcase
 
-        if @user_input == "easy" || @user_input == "medium" || @user_input == "hard"
+        case @user_input
+        when "easy"
             puts ""
             print_difficulty_champions(@user_input)
-        elsif @user_input == "menu"
+        when "medium"
+            puts ""
+            print_difficulty_champions(@user_input)
+        when "hard"
+            puts ""
+            print_difficulty_champions(@user_input)
+        when "menu"
             main_menu
-        elsif @user_input == "exit"
+        when "exit"
             cya_later
             exit
         else
             invalid_input
             difficulty_menu
         end
-
+        
         ask_again_difficulty
     end
 
@@ -274,3 +281,17 @@ end
     # ask_specific_champion
     # user_input2 = gets.chomp.to_i
     # print_champion_details_difficulty(user_input, user_input2)
+
+# This is for #difficulty_menu method
+        # if @user_input == "easy" || @user_input == "medium" || @user_input == "hard"
+        #     puts ""
+        #     print_difficulty_champions(@user_input)
+        # elsif @user_input == "menu"
+        #     main_menu
+        # elsif @user_input == "exit"
+        #     cya_later
+        #     exit
+        # else
+        #     invalid_input
+        #     difficulty_menu
+        # end
