@@ -126,14 +126,16 @@ class LolChampions::CLI
 
     def another_one?
         puts "Would you like to learn about another champion? yes or no"
-        input = get_user_input.downcase
-        if input == "yes"
+        user_input = gets.chomp.downcase
+        if user_input == "yes"
             puts ""
             call
-        elsif input == "no"
+        elsif user_input == "no"
+            cya_later
             exit
         else
             puts "You have made an invalid selection, please try again"
+            puts ""
             another_one?
         end
     end
@@ -171,15 +173,21 @@ class LolChampions::CLI
 
     def champion_print_out(champion)
         puts ""
-        puts "---------------------"
-        puts ""
+        puts "---------------------------------------------"
         puts "Name: #{champion.name}"
         puts "Title: #{champion.title}"
         puts "Champion Type(s): #{champion.tags}"
         puts "Damage Type: #{champion.damage_type}"
-        puts "Basic Stats: #{champion.stats} "
-        puts ""
-        puts "---------------------"
+        puts "Base Stats: "
+        puts "            HP: #{champion.stats["hp"]}"
+        puts "            Move Speed: #{champion.stats["movespeed"]}"
+        puts "            Armor: #{champion.stats["armor"]}"
+        puts "            Magic Resistance: #{champion.stats["spellblock"]}"
+        puts "            Attack Range: #{champion.stats["attackrange"]} "
+        puts "            Crit%: #{champion.stats["crit"]}"
+        puts "            Attack Damage: #{champion.stats["attackdamage"]}"
+        puts "            Attack Speed: #{champion.stats["attackspeed"]}"
+        puts "---------------------------------------------"
         puts ""
     end
 end
