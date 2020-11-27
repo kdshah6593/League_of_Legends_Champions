@@ -6,21 +6,23 @@ class LolChampions::CLI
     end
 
     def call
+        puts ""
         puts "Hello Summoner, welcome to the League of Legends Champion Finder!"
+        puts "Note: Type 'menu' to return to the Main Menu or 'exit' to exit the program"
         puts ""
         main_menu
         another_one?
     end
 
     def main_menu
-                                                                                                        # Provide Initial Menu Options
-        puts "1. All the Champions"
-        puts "2. Champions by Difficulty Level"
-        puts "3. Champions by Type"
-        print "How would you like to find a champion? Select from the options above: 1, 2, 3, or exit? "
-                                                                                                        # Get User Choice
+        puts "Main Menu"
+        puts "1. See full list of the Champions"
+        puts "2. Find Champions by Difficulty Level"
+        puts "3. Find Champions by Type"
+        puts ""
+        print "How would you like to find a champion? Select a number from the options above: "
         user_input = gets.chomp
-                                                                                                        # Based on User Choice, run the next method
+
         if user_input.to_i == 1
             puts ""
             print_all_champions
@@ -28,29 +30,21 @@ class LolChampions::CLI
             user_input2 = gets.chomp.to_i
             print_champion(user_input2)
         elsif user_input.to_i == 2
-            puts ""
-            difficulty_menu                                                                             #run method to show a new menu of difficulty levels
+            difficulty_menu
         elsif user_input.to_i == 3
-            puts ""
-            type_menu                                                                                   #run method to show a new menu of types
+            type_menu
         elsif user_input == 'exit'
             cya_later
             exit
         else
-            puts "You have made an invalid selection, please try again"
-            puts ""
+            invalid_input
             main_menu
         end
     end
 
-
-    #The below methods need to pull from Champion class using find methods based on deeper dive into attributes
-
     def difficulty_menu
-        puts "Type menu to return to the main menu or exit to exit the program"
         puts ""
         print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
-        
         user_input = gets.chomp.downcase
 
         if user_input == "easy" || user_input == "medium" || user_input == "hard"
@@ -62,16 +56,16 @@ class LolChampions::CLI
             cya_later
             exit
         else
-            puts "You have made an invalid selection, please try again"
+            invalid_input
             difficulty_menu
         end
+
         ask_specific_champion
         user_input2 = gets.chomp.to_i
         print_champion_difficulty(user_input, user_input2)
     end
 
     def type_menu
-        puts "Type menu to return to the main menu or exit to exit the program"
         puts ""
         puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
         print "Which champions based on type would you like too see? "
@@ -86,16 +80,14 @@ class LolChampions::CLI
             cya_later
             exit
         else
-            puts "You have made an invalid selection, please try again"
+            invalid_input
             type_menu
         end
+
         ask_specific_champion
         user_input2 = gets.chomp.to_i
         print_champion_type(user_input, user_input2)
     end
-
-
-    #This method will list all the Champion Instances with index number
     
     def print_all_champions
         LolChampions::Champion.all.each.with_index(1) do |champion, index|
@@ -103,7 +95,6 @@ class LolChampions::CLI
         end
     end
 
-                                                                                                #This method will list all the Champion Instances by Type with index number
     def print_type_champions(user_input)
         champions = LolChampions::Champion.find_by_type(user_input)
         champions.each.with_index(1) do |champion, index|
@@ -111,7 +102,6 @@ class LolChampions::CLI
         end
     end
 
-                                                                                                #This method will list all the Champion Instances by Difficulty with Index number
     def print_difficulty_champions(user_input)
         champions = LolChampions::Champion.find_by_difficulty(user_input)
         champions.each.with_index(1) do |champion, index|
@@ -119,7 +109,6 @@ class LolChampions::CLI
         end
     end
 
-                                                                                                #These methods are for repeating statements 
     def ask_specific_champion
         print "Enter the number of the specific champion you would like to know more about: "
     end
@@ -134,10 +123,15 @@ class LolChampions::CLI
             cya_later
             exit
         else
-            puts "You have made an invalid selection, please try again"
+            invalid_input
             puts ""
             another_one?
         end
+    end
+
+    def invalid_input
+        puts ""
+        puts "You have made an invalid selection, please try again"
     end
 
     def cya_later
