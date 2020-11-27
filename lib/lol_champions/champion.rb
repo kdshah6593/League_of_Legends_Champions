@@ -22,6 +22,16 @@ class LolChampions::Champion
         @@all << self
     end
 
+    def damage_type
+        if self.info["magic"] < 4
+            "Physical"
+        elsif self.info["magic"] >= 4 && self.info["magic"] < 7
+            "Mixed"
+        elsif self.info["magic"] >= 7
+            "Magic"
+        end
+    end
+
     # This method instantiantes new champions based on a collection passed to it; this will be used in the api method
     def self.create_from_collection(collection_hash)
         collection_hash.each do |k, v|
