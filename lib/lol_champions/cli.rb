@@ -47,30 +47,6 @@ class LolChampions::CLI
             puts ""
             main_menu
         end
-
-        # if user_input.to_i == 1
-        #     puts ""
-        #     print_all_champions
-        #     ask_specific_champion
-        #     user_input2 = gets.chomp.to_i
-        #     print_champion(user_input2)
-        # elsif user_input.to_i == 2
-        #     difficulty_menu
-        # elsif user_input.to_i == 3
-        #     type_menu
-        # elsif user_input == 'menu'
-        #     puts ""
-        #     puts "You are already at the Main Menu!"
-        #     puts ""
-        #     main_menu
-        # elsif user_input == 'exit'
-        #     cya_later
-        #     exit
-        # else
-        #     invalid_input
-        #     puts ""
-        #     main_menu
-        # end
     end
 
     def difficulty_menu
@@ -216,3 +192,31 @@ class LolChampions::CLI
         puts ""
     end
 end
+
+
+
+# ------- OLD CODE THAT HAS BEEN REFACTORED ABOVE -------
+# This is for #main_menu method
+    # if user_input.to_i == 1
+    #     puts ""
+    #     print_all_champions
+    #     ask_specific_champion
+    #     user_input2 = gets.chomp.to_i
+    #     print_champion(user_input2)
+    # elsif user_input.to_i == 2
+    #     difficulty_menu
+    # elsif user_input.to_i == 3
+    #     type_menu
+    # elsif user_input == 'menu'
+    #     puts ""
+    #     puts "You are already at the Main Menu!"
+    #     puts ""
+    #     main_menu
+    # elsif user_input == 'exit'
+    #     cya_later
+    #     exit
+    # else
+    #     invalid_input
+    #     puts ""
+    #     main_menu
+    # end
