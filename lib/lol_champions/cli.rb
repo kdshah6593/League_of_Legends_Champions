@@ -50,18 +50,18 @@ class LolChampions::CLI
     def difficulty_menu
         puts ""
         print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
-        @user_input = gets.chomp.downcase
+        @difficulty_input = gets.chomp.downcase
 
-        case @user_input
+        case @difficulty_input
         when "easy"
             puts ""
-            print_difficulty_champions(@user_input)
+            print_difficulty_champions(@difficulty_input)
         when "medium"
             puts ""
-            print_difficulty_champions(@user_input)
+            print_difficulty_champions(@difficulty_input)
         when "hard"
             puts ""
-            print_difficulty_champions(@user_input)
+            print_difficulty_champions(@difficulty_input)
         when "menu"
             main_menu
         when "exit"
@@ -79,14 +79,14 @@ class LolChampions::CLI
         puts ""
         puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
         print "Which champions based on type would you like too see? "
-        @user_input = gets.chomp.downcase.capitalize
+        @type_input = gets.chomp.downcase.capitalize
 
-        if @user_input == "Fighter" || @user_input == "Tank" || @user_input == "Mage" || @user_input == "Assassin" || @user_input == "Marksman" || @user_input == "Support"
+        if @type_input == "Fighter" || @type_input == "Tank" || @type_input == "Mage" || @type_input == "Assassin" || @type_input == "Marksman" || @type_input == "Support"
             puts ""
-            print_type_champions(@user_input)
-        elsif @user_input == "Menu"
+            print_type_champions(@type_input)
+        elsif @type_input == "Menu"
             main_menu
-        elsif @user_input == "Exit"
+        elsif @type_input == "Exit"
             cya_later
             exit
         else
@@ -96,7 +96,7 @@ class LolChampions::CLI
 
         ask_again_type
     end
-#---------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
     def print_all_champions
         list_champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name}"
@@ -116,7 +116,7 @@ class LolChampions::CLI
             puts "#{index}. #{champion.name}"
         end
     end
-#---------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
     def ask_specific_champion
         print "Enter the number of the specific champion you would like to know more about: "
     end
@@ -145,7 +145,7 @@ class LolChampions::CLI
     def cya_later
         puts "See you on the Rift. Bye!"
     end
-#---------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
     def list_champions
         LolChampions::Champion.all
     end
@@ -157,7 +157,7 @@ class LolChampions::CLI
     def list_champions_type(type)
         LolChampions::Champion.find_by_type(type)
     end
-#---------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
     def print_champion_details(number)
         champion = list_champions[number - 1]
         champion_print_out(champion)
@@ -192,7 +192,7 @@ class LolChampions::CLI
         puts "---------------------------------------------"
         puts ""
     end
-#---------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
     def ask_again
         ask_specific_champion
         user_input2 = gets.chomp
