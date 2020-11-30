@@ -50,18 +50,18 @@ class LolChampions::CLI
     def difficulty_menu
         puts ""
         print "Which champions based on difficulty to play would you like too see? Easy, Medium, or Hard? "
-        @difficulty_input = gets.chomp.downcase
+        @user_input = gets.chomp.downcase
 
-        case @difficulty_input
+        case @user_input
         when "easy"
             puts ""
-            print_difficulty_champions(@difficulty_input)
+            print_difficulty_champions(@user_input)
         when "medium"
             puts ""
-            print_difficulty_champions(@difficulty_input)
+            print_difficulty_champions(@user_input)
         when "hard"
             puts ""
-            print_difficulty_champions(@difficulty_input)
+            print_difficulty_champions(@user_input)
         when "menu"
             main_menu
         when "exit"
@@ -79,14 +79,14 @@ class LolChampions::CLI
         puts ""
         puts "Champion types are Fighter, Tank, Mage, Assassin, Marksman, or Support"
         print "Which champions based on type would you like too see? "
-        @type_input = gets.chomp.downcase.capitalize
+        @user_input = gets.chomp.downcase.capitalize
 
-        if @type_input == "Fighter" || @type_input == "Tank" || @type_input == "Mage" || @type_input == "Assassin" || @type_input == "Marksman" || @type_input == "Support"
+        if @user_input == "Fighter" || @user_input == "Tank" || @user_input == "Mage" || @user_input == "Assassin" || @user_input == "Marksman" || @user_input == "Support"
             puts ""
-            print_type_champions(@type_input)
-        elsif @type_input == "Menu"
+            print_type_champions(@user_input)
+        elsif @user_input == "Menu"
             main_menu
-        elsif @type_input == "Exit"
+        elsif @user_input == "Exit"
             cya_later
             exit
         else
