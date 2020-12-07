@@ -145,10 +145,12 @@ class LolChampions::CLI
         puts "See you on the Rift. Bye!"
     end
 #---------------------------------------------------------------------------------------------------
+    def list_champions 
+        LolChampions::Champion.all
     end
 
     def list_champions_difficulty(difficulty)
-        champions = LolChampions::Champion.find_by_difficulty(difficulty)
+        LolChampions::Champion.find_by_difficulty(difficulty)
     end
 
     def list_champions_type(type)
@@ -190,6 +192,7 @@ class LolChampions::CLI
         puts ""
     end
 #---------------------------------------------------------------------------------------------------
+    def ask_again   
         ask_specific_champion
         user_input2 = gets.chomp
         input_int = user_input2.to_i
@@ -242,5 +245,4 @@ class LolChampions::CLI
             ask_again_type
         end
     end
-
 end
