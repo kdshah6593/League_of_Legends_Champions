@@ -95,7 +95,7 @@ class LolChampions::CLI
 
         ask_again_type
     end
-#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
+#---------------------------------------------------------------------------------------------------
     def print_all_champions
         list_champions.each.with_index(1) do |champion, index|
             puts "#{index}. #{champion.name}"
@@ -115,7 +115,7 @@ class LolChampions::CLI
             puts "#{index}. #{champion.name}"
         end
     end
-#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
+#---------------------------------------------------------------------------------------------------
     def ask_specific_champion
         print "Enter the number of the specific champion you would like to know more about: "
     end
@@ -144,9 +144,7 @@ class LolChampions::CLI
     def cya_later
         puts "See you on the Rift. Bye!"
     end
-#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
-    def list_champions
-        LolChampions::Champion.all
+#---------------------------------------------------------------------------------------------------
     end
 
     def list_champions_difficulty(difficulty)
@@ -156,7 +154,7 @@ class LolChampions::CLI
     def list_champions_type(type)
         LolChampions::Champion.find_by_type(type)
     end
-#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
+#---------------------------------------------------------------------------------------------------
     def print_champion_details(number)
         champion = list_champions[number - 1]
         champion_print_out(champion)
@@ -191,8 +189,7 @@ class LolChampions::CLI
         puts "---------------------------------------------"
         puts ""
     end
-#--------------------------------------------------------------------------------------------------- Refactor Opportunity?
-    def ask_again
+#---------------------------------------------------------------------------------------------------
         ask_specific_champion
         user_input2 = gets.chomp
         input_int = user_input2.to_i
@@ -247,50 +244,3 @@ class LolChampions::CLI
     end
 
 end
-
-
-
-# ------- OLD CODE THAT HAS BEEN REFACTORED ABOVE -------
-# This is for #main_menu method
-    # if user_input.to_i == 1
-    #     puts ""
-    #     print_all_champions
-    #     ask_specific_champion
-    #     user_input2 = gets.chomp.to_i
-    #     print_champion(user_input2)
-    # elsif user_input.to_i == 2
-    #     difficulty_menu
-    # elsif user_input.to_i == 3
-    #     type_menu
-    # elsif user_input == 'menu'
-    #     puts ""
-    #     puts "You are already at the Main Menu!"
-    #     puts ""
-    #     main_menu
-    # elsif user_input == 'exit'
-    #     cya_later
-    #     exit
-    # else
-    #     invalid_input
-    #     puts ""
-    #     main_menu
-    # end
-
-#When asking user if they want to find another champ
-    # ask_specific_champion
-    # user_input2 = gets.chomp.to_i
-    # print_champion_details_difficulty(user_input, user_input2)
-
-# This is for #difficulty_menu method
-        # if @user_input == "easy" || @user_input == "medium" || @user_input == "hard"
-        #     puts ""
-        #     print_difficulty_champions(@user_input)
-        # elsif @user_input == "menu"
-        #     main_menu
-        # elsif @user_input == "exit"
-        #     cya_later
-        #     exit
-        # else
-        #     invalid_input
-        #     difficulty_menu
-        # end
