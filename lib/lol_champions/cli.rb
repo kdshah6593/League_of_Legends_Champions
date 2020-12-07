@@ -1,8 +1,7 @@
 class LolChampions::CLI 
 
     def initialize
-        champions = LolChampions::API.get_champions
-        champions
+        LolChampions::API.get_champions
     end
 
     def call
